@@ -1,7 +1,7 @@
 package;
 
 import flixel.FlxG;
-#if cppA
+#if cpp
 import webm.*;
 #end
 
