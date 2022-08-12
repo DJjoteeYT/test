@@ -49,7 +49,6 @@ class Caching extends MusicBeatState
 
 	override function create()
 	{
-
 		FlxG.save.bind('funkin', 'ninjamuffin99');
 
 		PlayerSettings.init();
@@ -82,7 +81,7 @@ class Caching extends MusicBeatState
 		{
 			trace("caching images...");
 
-			for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/characters")))
+			for (i in FileSystem.readDirectory(FileSystem.absolutePath(SUtil.getPath() + "assets/shared/images/characters")))
 			{
 				if (!i.endsWith(".png"))
 					continue;
@@ -92,7 +91,7 @@ class Caching extends MusicBeatState
 
 		trace("caching music...");
 
-		for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/songs")))
+		for (i in FileSystem.readDirectory(FileSystem.absolutePath(SUtil.getPath() + "assets/songs")))
 		{
 			music.push(i);
 		}
@@ -102,7 +101,6 @@ class Caching extends MusicBeatState
 
 		var bar = new FlxBar(10,FlxG.height - 50,FlxBarFillDirection.LEFT_TO_RIGHT,FlxG.width,40,null,"done",0,toBeDone);
 		bar.color = FlxColor.PURPLE;
-
 		add(bar);
 
 		add(kadeLogo);
@@ -128,7 +126,6 @@ class Caching extends MusicBeatState
 		});
 
 		// cache thread
-
 		sys.thread.Thread.create(() -> {
 			cache();
 		});
@@ -152,7 +149,7 @@ class Caching extends MusicBeatState
 		for (i in images)
 		{
 			var replaced = i.replace(".png","");
-			var data:BitmapData = BitmapData.fromFile("assets/shared/images/characters/" + i);
+			var data:BitmapData = BitmapData.fromFile(SUtil.getPath() + "assets/shared/images/characters/" + i);
 			trace('id ' + replaced + ' file - assets/shared/images/characters/' + i + ' ${data.width}');
 			var graph = FlxGraphic.fromBitmapData(data);
 			graph.persist = true;
@@ -169,12 +166,9 @@ class Caching extends MusicBeatState
 			done++;
 		}
 
-
 		trace("Finished caching...");
 
 		loaded = true;
-
-		trace(Assets.cache.hasBitmapData('GF_assets'));
 
 		FlxG.switchState(new TitleState());
 	}
