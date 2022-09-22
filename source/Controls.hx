@@ -272,7 +272,7 @@ class Controls extends FlxActionSet
 	}
 	#end
 
-	#if android
+        #if android
 	public var trackedinputsUI:Array<FlxActionInput> = [];
 	public var trackedinputsNOTES:Array<FlxActionInput> = [];
 
@@ -386,7 +386,7 @@ class Controls extends FlxActionSet
 		}
 	}
 
-	public function removeFlxInput(Tinputs:Array<FlxActionInput>)
+	public function removeAControlsInput(Tinputs:Array<FlxActionInput>)
 	{
 		for (action in this.digitalActions)
 		{
